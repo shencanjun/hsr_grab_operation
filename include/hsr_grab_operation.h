@@ -13,7 +13,7 @@
 
 using namespace hirop_pickPlace;
 
-class hsr_grab_operation{
+class hsr_grab_operation:public IGrabOperation{
 public:
     
     hsr_grab_operation();

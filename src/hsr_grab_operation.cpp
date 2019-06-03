@@ -4,18 +4,9 @@ hsr_grab_operation::hsr_grab_operation()
 { 
 }
 
-void hsr_grab_operation::grab_init(ros::NodeHandle n)
-{
-    n_gripper = n;
-    client_serialOpen = n_gripper.serviceClient<hsr_gripper_driver::serial_open_srv>("serial_open");
-    client_gripperOpenSize = n_gripper.serviceClient<hsr_gripper_driver::open_size_srv>("gripper_set_open_size");
-	client_gripperOpen = n_gripper.serviceClient<hsr_gripper_driver::open_srv>("gripper_open");
-	client_gripperClose = n_gripper.serviceClient<hsr_gripper_driver::close_srv>("gripper_close");
-	client_gripperStop = n_gripper.serviceClient<hsr_gripper_driver::stop_srv>("gripper_stop");
-}
-
 int hsr_grab_operation::serial_open(std::string serialNo,int baudrate)
 {
+	client_serialOpen = n_gripper.serviceClient<hsr_gripper_driver::serial_open_srv>("serial_open");
     hsr_gripper_driver::serial_open_srv serialOpen_srv;
     serialOpen_srv.request.serialNo = serialNo;
     serialOpen_srv.request.baudrate = baudrate;
@@ -31,6 +22,7 @@ int hsr_grab_operation::serial_open(std::string serialNo,int baudrate)
 
 int hsr_grab_operation::gripper_open_size(int grab_max,int grab_min)
 {
+	client_gripperOpenSize = n_gripper.serviceClient<hsr_gripper_driver::open_size_srv>("gripper_set_open_size");
     hsr_gripper_driver::open_size_srv gripperOpenSize_srv;
 
 	gripperOpenSize_srv.request.max = grab_max;
@@ -47,6 +39,7 @@ int hsr_grab_operation::gripper_open_size(int grab_max,int grab_min)
 
 int hsr_grab_operation::gripper_open(int speed)
 {
+	client_gripperOpen = n_gripper.serviceClient<hsr_gripper_driver::open_srv>("gripper_open");
     hsr_gripper_driver::open_srv gripperOpen_srv;
 	gripperOpen_srv.request.speed = speed;
 	if(client_gripperOpen.call(gripperOpen_srv))
@@ -61,6 +54,7 @@ int hsr_grab_operation::gripper_open(int speed)
 
 int hsr_grab_operation::gripper_close(int speed, int force)
 {
+	client_gripperClose = n_gripper.serviceClient<hsr_gripper_driver::close_srv>("gripper_close");
     hsr_gripper_driver::close_srv gripperClose_srv;
 				
 	gripperClose_srv.request.speed = speed;
@@ -79,6 +73,7 @@ int hsr_grab_operation::gripper_close(int speed, int force)
 
 int hsr_grab_operation::gripper_Stop()
 {
+	client_gripperStop = n_gripper.serviceClient<hsr_gripper_driver::stop_srv>("gripper_stop");
     hsr_gripper_driver::stop_srv gripperStop_srv;
 				
 	if(client_gripperStop.call(gripperStop_srv))

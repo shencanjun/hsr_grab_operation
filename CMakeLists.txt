@@ -122,8 +122,8 @@ message_runtime
 ## Your package locations should be listed before other locations
 include_directories(
   include ${catkin_INCLUDE_DIRS}
-  /home/shen/hirop_picknadplace/hirop_PickPlace/include
-  /home/shen/hirop_picknadplace/hirop_PickPlace/
+  /home/shen/hirop_pickandplace/hirop_PickPlace/include
+  /home/shen/hirop_pickandplace/hirop_PickPlace/
 # include
 # ${catkin_INCLUDE_DIRS}
 )
@@ -211,15 +211,7 @@ LINK_DIRECTORIES(/home/shen/catkin_ws/src/hsr_pickplace/include/3rd/libs)
 add_library(hsr_grab_operation
   src/hsr_grab_operation.cpp
 )
-
-add_executable(hsr_grab_operation_exe
-  src/main.cpp)
 #add_dependencies(hsr_grab_operation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(hsr_grab_operation
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(hsr_grab_operation_exe
-  hsr_grab_operation
   ${catkin_LIBRARIES}
 )
