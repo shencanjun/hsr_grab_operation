@@ -122,8 +122,8 @@ message_runtime
 ## Your package locations should be listed before other locations
 include_directories(
   include ${catkin_INCLUDE_DIRS}
-  /home/shen/hirop_pickandplace/hirop_PickPlace/include
-  /home/shen/hirop_pickandplace/hirop_PickPlace/
+  /home/fshs/hirop_pickandplace/hirop_PickPlace/include/
+  /home/fshs/hirop_pickandplace/hirop_PickPlace/
 # include
 # ${catkin_INCLUDE_DIRS}
 )
@@ -206,7 +206,7 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-LINK_DIRECTORIES(/home/shen/catkin_ws/src/hsr_pickplace/include/3rd/libs)
+LINK_DIRECTORIES(/home/fshs/catkin_ws/src/hsr_pickplace/include/3rd/libs)
 
 add_library(hsr_grab_operation
   src/hsr_grab_operation.cpp
@@ -215,3 +215,5 @@ add_library(hsr_grab_operation
 target_link_libraries(hsr_grab_operation
   ${catkin_LIBRARIES}
 )
+
+add_dependencies(hsr_grab_operation ${catkin_EXPORTED_TARGETS})
